@@ -146,6 +146,6 @@ I saw the logs both on my docker logs console and `https://us1.my.wallarm.com/at
 I tried a couple of example requests to see how it is the detection is working. 
 
 ![Dashboard 1](./media/dashboard1.png)
-![Dashboard 1](./media/dashboard1.png)
+![Dashboard 2](./media/dashboard2.png)
 ![Attacks](./media/attacks.png)
 
