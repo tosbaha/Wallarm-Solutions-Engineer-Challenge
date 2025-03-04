@@ -15,21 +15,21 @@ I used below steps to successfully deploy the Wallarm Filtering using local Dock
 ![Token](./media/token.png)
 
 - As the documentation suggested, I used `Deploy` role when I was creating the token. It was hard to see the `Settings` section even on my 4K screen due to it is was all the way down the page. Maybe navigation page could be collapsed. 
-- I ran the wallarm node
+- I ran the wallarm node. I used request.bin service to inspect the traffic.
 
 ```sh
 docker run -d \
   --name wallarm-node \
   -e WALLARM_API_TOKEN='MY_TOKEN' \
   -e WALLARM_LABELS='group=public-test' \
-  -e NGINX_BACKEND='http://httpbin.org' \
+  -e NGINX_BACKEND='https://xxxx.oast.pro' \
   -e WALLARM_API_HOST='us1.api.wallarm.com' \
   -p 80:80 \
   wallarm/node:5.3.8
 
 ```
 
-I used `httpbin.org` to proxy my local traffic. Since my node is deployed in the US region I used the `us1.api.wallarm.com` endpoint.
+I used `request.bin` to proxy my local traffic. Since my node is deployed in the US region I used the `us1.api.wallarm.com` endpoint.
 
 - I checked if my API key or settings were correct by using the below commands.
 
@@ -123,11 +123,7 @@ I saw that it can't connect to some endpoint at port `3313` but it seems this is
 
 ### 2️⃣ Set Up a Backend Origin
 
-- I created a simple backend by using a Docker. Since this backend is also deployed on my local machine it was reachable from Wallarm filtering node
-
-```sh
-docker run -d --name test-backend -p 8080:80 nginx
-```
+- I used `request.bin` to easily inspect the traffic. 
 
 
 ### 3️⃣ Generate Traffic Using GoTestWAF
